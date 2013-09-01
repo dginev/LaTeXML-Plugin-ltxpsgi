@@ -1,4 +1,4 @@
-LaTeXML-Plugin-ltxpsgi
+LaTeXML::Plugin::ltxpsgi
 ======================
 
-PSGI web service for LaTeXML
+A PSGI web service for LaTeXML
