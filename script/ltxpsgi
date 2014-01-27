@@ -21,9 +21,9 @@ use JSON::XS qw(encode_json decode_json);
 use URI::Escape;
 use Data::Dumper;
 
-use LaTeXML::Util::Config;
+use LaTeXML::Common::Config;
 use LaTeXML::Util::Pathname;
-use LaTeXML::Converter;
+use LaTeXML;
 
 sub parse_request_body {
     my $env = shift;
@@ -113,7 +113,7 @@ my $app = sub {
   $source = uri_unescape($source);
   push @$opts, ('source', $source); # Set in options hash, to e.g. guess bibTeX jobs
   # 2. Convert
-  my $config = LaTeXML::Util::Config->new();
+  my $config = LaTeXML::Common::Config->new();
   $config->read_keyvals($opts);
   $config->set('local', (($env->{'SERVER_NAME'} eq 'localhost') || ($env->{'SERVER_NAME'} eq '127.0.0.1')));
   my $base = $config->get('base');
@@ -129,7 +129,7 @@ my $app = sub {
   }
 
   # We now have a LaTeXML config object - $config.
-  my $converter = LaTeXML::Converter->get_converter($config);
+  my $converter = LaTeXML->get_converter($config);
   #Override/extend with session-specific options in $opt:
   $converter->prepare_session($config);
   # If there are no protocols, use literal: as default:

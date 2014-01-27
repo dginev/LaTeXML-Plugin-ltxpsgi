@@ -1,6 +1,6 @@
 preload = article.cls
 preload = LaTeX.pool
-embed =
+whatsout = fragment
 whatsin = fragment
 source = ../fragment.tex
 preamble = ../pre.tex
