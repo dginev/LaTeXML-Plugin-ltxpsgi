@@ -81,7 +81,7 @@ be deployed under any production web-server compatible with PSGI,
       <Location />
         SetHandler perl-script
         PerlHandler Plack::Handler::Apache2
-        PerlSetVar psgi_app /path/to/LaTeXML/blib/script/latexml.psgi
+        PerlSetVar psgi_app /path/to/LaTeXML/blib/script/ltxpsgi
       </Location>
 
       ErrorLog /var/log/apache2/latexml.error.log
