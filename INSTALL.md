@@ -4,44 +4,20 @@ This manual assumes a Debian-based OS.
 
 ### Generics
 
-1. Install a TeX distribution, e.g. TeXlive:
+1. Install LaTeXML, as described at [the official LaTeXML installation instructions](http://dlmf.nist.gov/LaTeXML/get.html)
+
+2. Test and (optionally) install ltxPSGI
 
   ```
-  $ sudo apt-get install texlive
-  ```
-
-2. Install Subversion
-  
-  ```  
-  $ sudo apt-get install subversion
-  ```
-
-3. Install LaTeXML dependencies
-  
-  ```
-  $ sudo apt-get install libclone-perl \
-  libdata-compare-perl perlmagick \
-  libparse-recdescent-perl libxml-libxml-perl \
-  libxml-libxslt-perl libarchive-zip-perl libio-string-perl
-  ```
-
-4. Install LaTeXML from trunk:
-
-  ```
-  $ svn co https://svn.mathweb.org/repos/LaTeXML/trunk LaTeXML/
-  $ cd LaTeXML/
-  $ perl Makefile.PL
-  $ make
-  $ make test
-  $ sudo make install
-  ```
-
-5. Test and (optionally) install ltxPSGI
-
-  ```
-  $ cd /path/to/LaTeXML-Plugin-ltxpsgi
+  $ git clone https://github.com/dginev/LaTeXML-Plugin-ltxpsgi
+  $ cd LaTeXML-Plugin-ltxpsgi
   $ perl Makefile.PL ;  make ; make test
   $ sudo make install
+  ```
+
+or via cpanm:
+  ```
+  $ cpanm git://github.com/dginev/LaTeXML-Plugin-ltxpsgi.git
   ```
 
 ### Deployment
