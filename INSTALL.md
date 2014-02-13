@@ -4,6 +4,14 @@ This manual assumes a Debian-based OS.
 
 ### Generics
 
+0. On Debian, consider installing the prerequisite Perl packages from the package manager:
+```
+sudo apt-get install libplack-perl \ 
+  libhttp-message-perl \
+  liburi-perl \
+  libjson-xs-perl \
+```
+
 1. Install LaTeXML, as described at [the official LaTeXML installation instructions](http://dlmf.nist.gov/LaTeXML/get.html)
 
 2. Test and (optionally) install ltxPSGI
