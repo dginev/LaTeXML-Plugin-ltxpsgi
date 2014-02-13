@@ -65,7 +65,7 @@ be deployed under any production web-server compatible with PSGI,
   ```
 
   1.6. Create a "latexml" file in /etc/apache2/sites-available and
-  a symbolic link to it in /etc/apache2/sites-enabled
+  a symbolic link to it in /etc/apache2/sites-enabled (you can use ```a2ensite latexml``` for that) 
 
   ```
   <VirtualHost *:80>
@@ -105,6 +105,8 @@ be deployed under any production web-server compatible with PSGI,
     $ENV{ARXMLIVINPUTS} = '/path/to/arxmliv/sty'
   </Perl>
   ```
+
+  To test the setup you can run a simple query e.g. ```curl -d 'tex=literal:$a+b^2$'  localhost:80``` from the commandline.
 
 2. Standalone
 
