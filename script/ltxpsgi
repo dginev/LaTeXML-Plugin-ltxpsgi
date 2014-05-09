@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 our $VERSION = '0.3';
-
+our @latexml_inputs = ('.', grep {defined} split(':',($ENV{LATEXMLINPUTS}||'')));
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';
 my $FILE_BASE;
@@ -127,6 +127,8 @@ my $app = sub {
        $LaTeXML::Util::Pathname::Pathname_CWD=$canonical_base;
     }
   }
+  # Use the LATEXMLINPUTS paths:
+  $config->set('paths',\@latexml_inputs);
 
   # We now have a LaTeXML config object - $config.
   my $converter = LaTeXML->get_converter($config);
