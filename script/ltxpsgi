@@ -5,7 +5,7 @@ eval 'exec /usr/bin/perl  -S $0 ${1+"$@"}'
 use strict;
 use warnings;
 
-our $VERSION = '0.3';
+our $VERSION = '0.4';
 our @latexml_inputs = ('.', grep {defined} split(':',($ENV{LATEXMLINPUTS}||'')));
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';
