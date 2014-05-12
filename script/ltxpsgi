@@ -89,7 +89,7 @@ my $app = sub {
   if (scalar((grep {defined} @$post_params)) == 1) {
     $source = $post_params->[0];
     $post_params=[];
-  } elsif ((scalar(@$post_params) == 2) && ($post_params->[0] !~ /^tex|source$/)) {
+  } elsif ((scalar(@$post_params) == 2) && ($post_params->[0] !~ /^(tex|source)$/)) {
     $source = $post_params->[0].$post_params->[1];
     $post_params=[];
   }
@@ -98,11 +98,11 @@ my $app = sub {
   my $opts = [];
   # Ugh, disallow 'null' as a value!!! (TODO: Smarter fix??)
   while (my ($key,$value) = splice(@all_params,0,2)) {
-    if ($key =~ /^(tex)|(source)$/) {
+    if ($key =~ /^(tex|source)$/) {
       # TeX is data, separate
       $source = $value unless defined $source;
       next;
-    } elsif ($key=~/local|path/) {
+    } elsif ($key =~ /^(local|path)$/) {
       # You don't get to specify harddrive info in the web service
       next;
     }
