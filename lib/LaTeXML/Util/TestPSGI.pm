@@ -35,9 +35,15 @@ sub psgi_ok {
     ['nocomments', ''] );
   my $body = '';
   my $timed = undef;
+  SKIP: {
   foreach my $opt(@$opts) {
     if ($$opt[0] eq 'timeout') { # Ensure .opt timeout takes precedence
       if ($timed) { next; } else {$timed=1;}
+    }
+    if ($$opt[0] eq 'source') {
+      if (pathname_protocol($$opt[1]) eq 'file') {
+        skip("Ignoring file system test (source is $$opt[1])",1);
+      }
     }
     $body.= $$opt[0] . '=' . (length($$opt[1]) ? uri_escape($$opt[1]) : '') . '&';
   }
@@ -57,7 +63,7 @@ sub psgi_ok {
   }
   else {
     #TODO: Skip 3 tests
-  }
+  }}
 }
 
 sub psgi_tests {
