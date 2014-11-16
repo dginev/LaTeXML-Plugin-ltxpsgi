@@ -77,7 +77,7 @@ my $app = sub {
         result=>'',
         status=>'Fatal:http:request Bad Request, HTTP POST with form-data required',
         status_code=>3,
-        log=>"Fatal:http:request Bad Request, HTTP POST with form-data required\nStatus:conversion:3\n"
+        log=>"Fatal:http:request Bad Request, HTTP POST with form-data required\nStatus:conversion:3"
         })]];
   }
   
@@ -116,7 +116,20 @@ my $app = sub {
   push @$opts, ('source', $source); # Set in options hash, to e.g. guess bibTeX jobs
   # 2. Convert
   my $config = LaTeXML::Common::Config->new();
-  $config->read_keyvals($opts);
+  my $config_build_return = eval {
+    $config->read_keyvals($opts, silent=>1); };
+  if (!$config_build_return || $@) {
+    $@ = "See 'latexmlc --help' for the full options specification" unless $@;
+    return [
+      '400',
+      [ 'Content-Type' => 'application/json; charset=utf-8' ],
+      [ encode_json({
+        result=>'',
+        status=>'Fatal:http:request You have used illegal or ill-formed options in your request.',
+        status_code=>3,
+        log=>"Fatal:http:request You have used illegal or ill-formed options in your request.\nDetails:\n$@\nStatus:conversion:3\n"
+        })]];
+  }
   $config->set('local', (($env->{'SERVER_NAME'} eq 'localhost') || ($env->{'SERVER_NAME'} eq '127.0.0.1')));
   my $base = $config->get('base');
   my $saved_cdir;
