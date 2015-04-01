@@ -13,7 +13,7 @@ WriteMakefile(
   ABSTRACT => "ltxPSGI - A headless PSGI web service for LaTeXML",
   VERSION_FROM => 'script/ltxpsgi',
   PREREQ_PM => {
-    'LaTeXML' => '0.8.0',
+    'LaTeXML' => '0.8.1',
     'Plack::Test' => 0,
     'HTTP::Request::Common'=>0,
     'URI::Escape'=>0,
