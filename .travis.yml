@@ -7,10 +7,6 @@ perl:
   - "5.8"
 
 before_install:
-  #This should solve problem installing Perl's DB_File & GraphViz
+  #This should solve problem installing Perl's DB_File & GraphViz, needed for LaTeXML
   - "sudo apt-get update -qq"
   - "sudo apt-get install libdb-dev libxml2-dev libxslt1-dev 2>&1 | tail -n 4"
-  # Testing LaTeXML takes 3+ minutes, but since the main repo doesn't have a Travis build, we have no choice...
-  - "cpanm git://github.com/brucemiller/LaTeXML.git"
-  # Finally the PSGI components
-  - "sudo apt-get install libplack-perl libhttp-message-perl liburi-perl libjson-xs-perl"
