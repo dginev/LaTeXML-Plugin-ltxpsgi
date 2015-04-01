@@ -11,6 +11,7 @@ use LaTeXML::Util::Pathname;
 
 use URI::Escape;
 use JSON::XS;
+use Data::Dumper;
 
 use FindBin;
 our $psgi_app = require("$FindBin::Bin/../blib/script/ltxpsgi");
@@ -56,7 +57,7 @@ sub psgi_ok {
       my $result_strings = [ split("\n",($res->{result}||'')) ];
       $result_strings = [''] unless scalar(@$result_strings);
       is_strings($result_strings,
-                  LaTeXML::Util::Test::get_filecontent("$base.xml"),"PSGI app: $base");
+                  LaTeXML::Util::Test::get_filecontent("$base.xml"),"PSGI app: $base\n".Dumper($res));
       unlink "$base.test.xml" if -e "$base.test.xml";
       unlink "$base.test.status" if -e "$base.test.status";
     };
