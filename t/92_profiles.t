@@ -9,7 +9,7 @@ use LaTeXML::Util::TestPSGI;
 #  latexmlc {$triggers} $name
 #).
 
-psgi_tests('t/daemon/profiles');
-
+psgi_tests('t/daemon/profiles',
+        requires=>{fragment=>'dvipsnam.def',math=>'dvipsnam.def'});
 #**********************************************************************
 1;
