@@ -50,16 +50,22 @@ sub parse_request_body {
 
     # Parse the body:
     # Split, and make sure keys with no values get an empty string stub
-    my $parameters = [ map {scalar(@{$_})==1 ? (@{$_},'') : @{$_}}
-      map { [split(/=/,$_)] } map {split(/\&/,$_)} $body ];
+    my $parameters = [
+      map { $$_[0], $$_[1] || '' }
+      map { [split(/=/,$_,2)] } # Split key=values
+      map { split(/\&/,$_)} # Split URI options
+      $body ];
     return $parameters;
 }
 sub parse_request_query {
   my $env = shift;
   my $body = $env->{QUERY_STRING};
   # Split, and make sure keys with no values get an empty string stub
-  my $parameters = [ map {scalar(@{$_})==1 ? (@{$_},'') : @{$_}}
-      map { [split(/=/,$_)] } map {split(/\&/,$_)} $body ];
+  my $parameters = [
+    map { $$_[0], $$_[1] || '' }
+    map { [split(/=/,$_,2)] } # Split key=values
+    map { split(/\&/,$_)} # Split URI options
+    $body ];
   return $parameters;
 }
 
